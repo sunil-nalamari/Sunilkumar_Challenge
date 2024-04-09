@@ -18,14 +18,15 @@ spec:
         - name: nginx
           image: nginx:latest
           ports:
-            - containerPort: 80
+            - containerPort: 30005
           volumeMounts:
             - name: html
-              mountPath: /usr/share/nginx/html
+              mountPath: /usr/share/nginx/html/index.html
+              subPath: index.html
       volumes:
-        - name: html
-          hostPath:
-            path: SunilKumar_Challenge/helloworld.html
+        - name: nginx-index-file
+          configMap:
+            name: index-html-configmap.yaml
 ---
 apiVersion: v1
 kind: Service
